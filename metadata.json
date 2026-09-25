@@ -1,0 +1,6 @@
+{
+  "name": "TechTalentIQ - IT Job Market Deep Research & Intelligence Hub",
+  "description": "Comprehensive intelligence platform and deep research engine analyzing global IT hiring trends, tech stacks, compensation benchmarks, and AI workforce dynamics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
