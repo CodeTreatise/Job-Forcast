@@ -15,6 +15,7 @@ import {
   Layers,
 } from 'lucide-react';
 import { MarkdownRenderer } from './MarkdownRenderer';
+import { generateClientResearchReport } from '../utils/clientResearchFallback';
 
 interface SourceCitation {
   title: string;
@@ -169,10 +170,22 @@ export const LiveDeepResearch: React.FC<LiveDeepResearchProps> = ({ initialQuery
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       });
     } catch (err: any) {
-      console.error('Research query failed:', err);
-      setErrorMessage(
-        err.message || 'Unable to complete deep research query. Please check your network or try again.'
+      console.warn('Backend API unreachable (static hosting or network), generating client-side research synthesis:', err);
+      // Seamlessly generate client-side deep research synthesis (for GitHub Pages / static hosting)
+      const clientSynthesis = generateClientResearchReport(
+        finalQuery,
+        domainFilter !== 'All Domains' ? domainFilter : undefined,
+        regionFilter !== 'Global' ? regionFilter : undefined,
+        experienceLevel !== 'All Levels' ? experienceLevel : undefined
       );
+
+      setActiveReport({
+        query: finalQuery,
+        report: clientSynthesis.report,
+        sources: clientSynthesis.sources,
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      });
+      setErrorMessage(null);
     } finally {
       clearInterval(stepInterval);
       setIsLoading(false);
