@@ -22,26 +22,26 @@ export const CurrencySelector: React.FC<CurrencySelectorProps> = ({
       {/* PPP Toggle Button */}
       <button
         onClick={onTogglePPP}
-        className={`flex items-center gap-1 px-2.5 py-1 rounded-lg text-xs font-medium border transition-all cursor-pointer ${
+        className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-xs font-semibold border transition-all cursor-pointer ${
           isPPPEnabled
-            ? 'bg-amber-500/20 text-amber-300 border-amber-500/50 shadow-sm'
-            : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-slate-200'
+            ? 'bg-amber-400 text-slate-950 border-amber-300 shadow-sm shadow-amber-500/20'
+            : 'bg-slate-800/90 text-slate-200 border-slate-700 hover:text-white hover:bg-slate-700'
         }`}
         title="Toggle Purchasing Power Parity (PPP) adjusted standard of living equivalence"
       >
-        <Scale className="w-3.5 h-3.5 text-amber-400" />
-        <span className="hidden sm:inline">PPP Mode:</span>
-        <span className="font-bold">{isPPPEnabled ? 'ON' : 'OFF'}</span>
+        <Scale className={`w-3.5 h-3.5 ${isPPPEnabled ? 'text-slate-950 stroke-[2.5]' : 'text-amber-400'}`} />
+        <span className="hidden sm:inline">PPP:</span>
+        <span>{isPPPEnabled ? 'ON' : 'OFF'}</span>
       </button>
 
       {/* Currency Selector Dropdown */}
       <div className="relative inline-flex items-center">
-        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-900 border border-slate-800 text-xs text-slate-200 hover:border-slate-700 transition-all">
+        <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-800/90 border border-slate-700 text-xs text-white hover:border-slate-500 transition-all">
           <Coins className="w-3.5 h-3.5 text-sky-400" />
           <select
             value={selectedCurrency}
             onChange={(e) => onSelectCurrency(e.target.value)}
-            className="bg-transparent text-xs font-semibold text-white focus:outline-none cursor-pointer pr-1"
+            className="bg-transparent text-xs font-bold text-white focus:outline-none cursor-pointer pr-1"
           >
             {Object.values(SUPPORTED_CURRENCIES).map((curr) => (
               <option key={curr.code} value={curr.code} className="bg-slate-950 text-white">
